@@ -1,0 +1,8 @@
+<h1>Friend Requests</h1>
+
+<% current_user.rec_requests.each do |r| %>
+    <% unless r.accepted? %>
+        <%= r.requestee.name %>
+        <%= link_to 'accept', accept_path(:req => r.id), method: :put, action: :accept %>
+    <% end %>
+<% end %>

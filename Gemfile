@@ -30,7 +30,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Use omniauth-facebook to allow users to login with Facebook
 gem 'omniauth-facebook'
-
+# Use materialize-css for styling
+gem 'materialize-sass'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

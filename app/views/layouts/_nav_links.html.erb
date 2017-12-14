@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <li><%= link_to "Logged in as #{current_user.name}", user_path(current_user.id) %></li>
+  <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+  <li><%= link_to requests_path do %>
+      Requests 
+      <% if current_user.current_requests.any? %>
+        <span class="new badge"><%= current_user.current_requests.count %></span>
+      <% end %>
+  <% end %></li>
+<% else %>
+ <li><%= link_to "Log In" , new_user_session_path %></li>
+ <li><%= link_to "Sign up", new_user_registration_path %></li>
+<% end %>
