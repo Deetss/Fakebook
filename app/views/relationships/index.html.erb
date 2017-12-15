@@ -3,6 +3,6 @@
 <% current_user.rec_requests.each do |r| %>
     <% unless r.accepted? %>
         <%= r.requestee.name %>
-        <%= link_to 'accept', accept_path(:req => r.id), method: :put, action: :accept %>
+        <%= link_to 'accept', accept_path(:req => r), method: :put, action: :accept %>
     <% end %>
 <% end %>

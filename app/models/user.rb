@@ -12,10 +12,22 @@ class User < ApplicationRecord
                                    dependent: :destroy
   
   def current_requests
-    rec_requests.where(accepted: nil)
+    rec_requests.where(accepted: false)
   end
   
   def friends
-    Relationship.all.where('requestee_id = ? OR requested_id = ? AND accepted = true', self, self)
+    Relationship.all.where('requested_id = ? OR requestee_id = ? AND accepted = true', self, self)
+  end
+  
+  def friends_with?(other_user)
+    if friends.empty?
+      false
+    elsif friends.find_by(requestee: other_user) || friends.find_by(requested: other_user)
+      true
+    end
+  end
+  
+  def requested?(other_user)
+    Relationship.all.where('requestee_id = ? OR requested_id = ?', self, self).any?
   end
 end

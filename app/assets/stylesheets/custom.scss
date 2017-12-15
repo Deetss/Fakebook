@@ -3,3 +3,8 @@
 $primary-color: #3b5998 !default;
 $secondary-color: #8b9dc3 !default;
 @import "materialize";
+
+a i.material-icons {
+    display: inline-block;
+    vertical-align: bottom;
+}

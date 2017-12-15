@@ -1,1 +1,14 @@
-<h1><%= current_user.name %></h1>
+<h1><%= @user.name %></h1>
+<%= pluralize(@friends.count, 'Friend') %>
+<% unless current_user == @user || current_user.requested?(@user) %>
+    <%= link_to request_friendship_path(:req_user => @user), class: "waves-effect waves-light btn" do %>
+        <i class="material-icons">group_add</i>
+        Add Friend
+    <% end %>
+<% end %>
+<% if current_user.friends_with?(@user) || current_user != @user %>
+        <%= link_to requests_path, method: :delete, action: :destroy, class: "waves-effect waves-light btn" do %>
+            <i class="material-icons">block</i>
+            Unfriend
+        <% end %>
+<% end %>
