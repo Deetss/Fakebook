@@ -1,11 +1,20 @@
 <% if user_signed_in? %>
+  <li>
+    <%= form_tag search_path, method: :get do %>
+      <div class="input-field">
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <%= search_field_tag :q, params[:q], id: "search" %>
+        <i class="material-icons">close</i>
+      </div>
+    <% end %>
+  </li>
   <li><%= link_to "Logged in as #{current_user.name}", user_path(current_user.id) %></li>
   <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
   <li class='center-align'><%= link_to requests_path do %>
     <i class="material-icons">language</i>
     <span>Notifications</span>
     <% if current_user.current_requests.any? %>
-      <span class="new badge"><%= current_user.current_requests.count %></span>
+      <span class="new badge red"><%= current_user.current_requests.count %></span>
     <% end %>
   <% end %></li>
 <% else %>

@@ -1,3 +1,36 @@
-<% unless user_signed_in? %>
+<% if user_signed_in? %>
+    <%= form_for :post , url: posts_path , method: :post, action: :create do |f| %>
+    <div class="row">
+        <div class="input-field col s6">
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <i class="material-icons prefix">mode_edit</i>
+            <%= f.text_area :content, id: "icon_prefix2", class: "materialize-textarea" %>
+            <%= f.label :content %>
+        </div>
+        <%= f.submit "Post" %>
+    </div>
+    <% end %>
+    <div class="row">
+        <div class="col s12 m6">
+        <% @feed.each do |post| %>
+          <div class="card ">
+            <div class="card-content black-text">
+              <span class="card-title"><%= link_to post.user.name, post.user %></span>
+              <p><%= post.content %></p>
+            </div>
+            <div class="card-action">
+            <% if post.liked_by?(current_user) %>
+              <%= link_to "Unlike", unlike_path(:post_id => post.id) %>
+            <% else %>
+              <%= link_to "Like", like_path(:post_id => post.id) %>
+            <% end %>
+              <%= link_to "Delete post", post , method: :delete if current_user.id == post.user_id %>
+              <span class="likes_count"><%= post.likes.count %> <i class="material-icons">thumb_up</i></span>
+            </div>
+          </div>
+        <% end %>
+        </div>
+    </div>
+<% else %>
     <%= render "devise/shared/session_form" %>
 <% end %>

@@ -1,0 +1,18 @@
+<h2>You searched for "<%= @q %>"</h2>
+
+<div class="row">
+    <div class="col s12 m6">
+    <% @results.each do |user| %>
+      <div class="card white">
+        <div class="card-content black-text">
+          <span class="card-title"><%= user.name %></span>
+          <p><%= pluralize(user.friends.count, 'Friend') %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to "View profile", user_path(user)%>
+        </div>
+      </div>
+    <% end %>
+    </div>
+</div>
+            

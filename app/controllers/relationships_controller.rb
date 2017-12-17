@@ -7,12 +7,14 @@ class RelationshipsController < ApplicationController
   def destroy
     @friendship = Relationship.find_by(requested: current_user) || Relationship.find_by(requestee: current_user)
     @friendship.destroy
+    flash[:danger] = "You unfriended #{params[:user_name]}!"
     redirect_back(fallback_location: root_path)
   end
   
   def accept
     @request = Relationship.find_by(id: params[:req])
     @request.update_attributes(accepted: true)
+    flash[:success] = "#{@request.requested.name} and you are now friends!"
     render :index
   end
   
@@ -21,7 +23,7 @@ class RelationshipsController < ApplicationController
     @request = current_user.sent_requests.build(requested: @requested_user )
     
     if @request.save
-      flash.now[:success] = 'Friend request sent'
+      flash[:success] = 'Friend request sent'
       redirect_to @requested_user
     else
       flash.now[:danger] = 'Friend request not sent'

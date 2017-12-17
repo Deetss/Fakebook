@@ -21,8 +21,19 @@
   </div>
  </nav>
  
- <p class="notice"><%= notice %></p>
- <p class="alert"><%= alert %></p>
+   <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <% flash.each do |msg_type, msg| %>
+        <div class="card <%= msg_type %>">
+          <div class="card-content white-text center-align">
+            <%= content_tag :p, msg %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  
+ 
 
   <div class="container">
       <%= yield %>

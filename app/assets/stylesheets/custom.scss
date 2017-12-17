@@ -4,7 +4,44 @@ $primary-color: #3b5998 !default;
 $secondary-color: #8b9dc3 !default;
 @import "materialize";
 
-a i.material-icons {
-    display: inline-block;
+/* Text */
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+    color: $secondary-color;
+}
+
+
+/* Flash */
+
+.danger {
+    background-color: red;
+}
+
+.success{
+    background-color: green;
+}
+
+.notice{
+    background-color: $secondary-color;
+}
+
+
+.warning {
+    background-color: yellow;
+}
+
+
+
+/* Icons */
+
+span.likes_count i.material-icons {
     vertical-align: bottom;
 }
+
+a {
+    i.material-icons {
+    display: inline-block;
+    vertical-align: bottom;
+    }
+}
+
+
