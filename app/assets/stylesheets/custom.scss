@@ -4,7 +4,11 @@ $primary-color: #3b5998 !default;
 $secondary-color: #8b9dc3 !default;
 @import "materialize";
 
-/* Drawer */
+/* Navigation */
+
+nav .input-field {
+    height: auto;
+}
 
 ul#mobile.side-nav.right.right-aligned {
     background-color: $primary-color;
