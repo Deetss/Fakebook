@@ -4,6 +4,17 @@ $primary-color: #3b5998 !default;
 $secondary-color: #8b9dc3 !default;
 @import "materialize";
 
+/* Drawer */
+
+ul#mobile.side-nav.right.right-aligned {
+    background-color: $primary-color;
+}
+
+.side-nav li a {
+    color: white;
+}
+
+
 /* Text */
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: $secondary-color;
