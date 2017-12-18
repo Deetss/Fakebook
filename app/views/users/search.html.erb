@@ -1,11 +1,12 @@
-<h2>You searched for "<%= @q %>"</h2>
+<% provide(:title, "Search") %>
+<h4>You searched for "<%= @q %>"</h4>
 
 <div class="row">
     <div class="col s12 m6">
     <% @results.each do |user| %>
       <div class="card white">
         <div class="card-content black-text">
-          <span class="card-title"><%= user.name %></span>
+          <span class="card-title"><%= gravatar_for(user, img_class: "circle") %> <%= user.name %></span>
           <p><%= pluralize(user.friends.count, 'Friend') %></p>
         </div>
         <div class="card-action">
@@ -15,4 +16,3 @@
     <% end %>
     </div>
 </div>
-            

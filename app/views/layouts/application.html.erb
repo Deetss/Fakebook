@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
- <nav>
-  <div class="nav-wrapper">
-    <%= link_to 'Fakebook', root_path, class: 'brand-logo left' %>
-    <a href="#" data-activates="mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down black-text">
-    <%= render 'layouts/nav_links' %>
-    </ul>
-    <ul class="side-nav right" id="mobile">
-    <%= render 'layouts/nav_links' %>
-    </ul>
-  </div>
- </nav>
- 
-   <div class="row">
-      <div class="col s12 m6 offset-m3">
-        <% flash.each do |msg_type, msg| %>
-        <div class="card <%= msg_type %>">
-          <div class="card-content white-text center-align">
-            <%= content_tag :p, msg %>
-          </div>
-        </div>
-        <% end %>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <%= link_to 'Fakebook', root_path, class: 'brand-logo' %>
+        <a href="#" data-activates="mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down black-text">
+        <%= render 'layouts/nav_links' %>
+        </ul>
+        <ul class="side-nav right" id="mobile">
+        <%= render 'layouts/nav_links' %>
+        </ul>
       </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+     <div class="row">
+        <div class="col s12 m6 offset-m3">
+          <% flash.each do |msg_type, msg| %>
+          <div class="card <%= msg_type %>">
+            <div class="card-content white-text center-align">
+              <%= content_tag :p, msg %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+        <%= yield %>
+        <%= debug(params) if Rails.env.development? %>
     </div>
+  </main>
   
- 
-
-  <div class="container">
-      <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
-  </div>
+  <%= render 'layouts/footer' %>
 </body>
 </html>

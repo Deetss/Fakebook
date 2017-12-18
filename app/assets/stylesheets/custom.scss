@@ -4,7 +4,25 @@ $primary-color: #3b5998 !default;
 $secondary-color: #8b9dc3 !default;
 @import "materialize";
 
+
+/* Cards */
+
+.card-action {
+    @extend .grey, .lighten-4;
+}
+
+/* Buttons */
+
+.btn {
+    height: 36px;
+}
+
+
 /* Navigation */
+
+nav .brand-logo {
+    padding-left: 15px;
+}
 
 nav .input-field {
     height: auto;
@@ -44,11 +62,15 @@ ul#mobile.side-nav.right.right-aligned {
     background-color: yellow;
 }
 
+.alert {
+    background-color: #fdd835;
+}
+
 
 
 /* Icons */
 
-span.likes_count i.material-icons {
+span i.material-icons {
     vertical-align: bottom;
 }
 
@@ -59,4 +81,22 @@ a {
     }
 }
 
+/* Footer */
 
+
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Alignment */
+
+.align-icon {
+    vertical-align: middle;
+}

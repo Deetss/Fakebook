@@ -1,0 +1,28 @@
+<ul class="collection">
+    <% @users.each do |user| %>
+        <li class="collection-item avatar">
+          <%= gravatar_for(user, img_class: "circle") %>
+          <span class="title"><%= user.name %></span>
+          <p><%= pluralize(user.friends.count, "Friend") %></p>
+          <p class="secondary-content">
+          <%= link_to user, class: "" do %>
+              View Profile
+              <i class="material-icons">visibility</i>
+          <% end %>
+          <br>
+          <% unless current_user.friends_list.include?(user) || current_user.requested?(user) || current_user == user %>
+            <%= link_to request_friendship_path(:req_user => user), class: "right" do %>
+              Add Friend
+              <i class="material-icons">group_add</i>
+            <% end %>
+          <% end %>
+          <% if current_user.friends_list.include?(user) %>
+            <%= link_to requests_path(user_name: user.name), method: :delete, action: :destroy, class: "right" do %>
+             Unfriend
+              <i class="material-icons">block</i>
+            <% end %>
+          <% end %>
+          </p>
+          </li>
+    <% end %>
+</ul>

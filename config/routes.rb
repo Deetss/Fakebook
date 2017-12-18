@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'comments/create'
+
+  get 'comments/destroy'
+
   root 'static_pages#home'
   
   get 'search', to: 'users#search'
@@ -10,10 +14,16 @@ Rails.application.routes.draw do
   delete 'requests', to: 'relationships#destroy'
   
   devise_for :users
-  resources :users, only: [:show, :edit]
+  resources :users, only: [:show, :edit, :index]
   
   resources :posts, only: [:create, :destroy]
   
   get "like", to: "likes#like_object"
   get "unlike", to: "likes#unlike_object"
+  
+  get "friends", to: "users#friends_list"
+  
+  
+  post "comments", to: "comments#create"
+  delete "comments", to: "comments#destroy"
 end

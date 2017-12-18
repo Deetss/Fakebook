@@ -1,28 +1,16 @@
-<h1><%= @user.name %></h1>
-<%= pluralize(@friends.count, 'Friend') %>
-<% unless current_user == @user || current_user.requested?(@user) %>
-    <%= link_to request_friendship_path(:req_user => @user), class: "waves-effect waves-light btn" do %>
-        <i class="material-icons">group_add</i>
-        Add Friend
-    <% end %>
+<% provide(:title, "#{@user.name}'s Profile") %>
+<h1><%= gravatar_for(@user) %> <%= @user.name %></h1>
+<%= link_to pluralize(@user.friends.count, 'Friend'), friends_path(user_id: @user.id) %>
+<% unless current_user.friends_list.include?(@user) || current_user.requested?(@user) || current_user == @user %>
+  <%= link_to request_friendship_path(:req_user => @user), class: "waves-effect waves-light btn" do %>
+    <i class="material-icons">group_add</i>
+    Add Friend
+  <% end %>
 <% end %>
-<% if current_user.friends_with?(@user) %>
-        <%= link_to requests_path(user_name: @user.name), method: :delete, action: :destroy, class: "waves-effect waves-light btn" do %>
-            <i class="material-icons">block</i>
-            Unfriend
-        <% end %>
+<% if current_user.friends_list.include?(@user) %>
+  <%= link_to requests_path(user_name: @user.name), method: :delete, action: :destroy, class: "waves-effect waves-light btn" do %>
+      <i class="material-icons">block</i>
+      Unfriend
+  <% end %>
 <% end %>
-<div class="row">
-    <div class="col s12 m6">
-    <% @user.posts.each do |post| %>
-      <div class="card ">
-        <div class="card-content black-text">
-          <p><%= post.content %></p>
-        </div>
-        <div class="card-action">
-          <%= link_to "Delete post", post , method: :delete if current_user == @user %>
-        </div>
-      </div>
-    <% end %>
-    </div>
-</div>
+<%= render 'users/feed' %>
