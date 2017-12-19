@@ -32,6 +32,8 @@ gem 'devise'
 gem 'omniauth-facebook'
 # Use materialize-css for styling
 gem 'materialize-sass'
+# Use figaro for ENV variables
+gem 'figaro'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
