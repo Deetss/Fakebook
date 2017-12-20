@@ -1,4 +1,6 @@
 <% if user_signed_in? %>
+<li><%= gravatar_for(current_user, size: 40, img_class: "align-icon circle") %> <%= current_user.name %></li>
+<li><%= link_to "Profile", user_path(current_user.id) %></li>
 <li>
   <%= form_tag search_path, method: :get do %>
     <div class="input-field">
@@ -10,20 +12,15 @@
 </li>
 <li><%= link_to "Browse Users", users_path %></li>
 <li><%= link_to requests_path do %>
-  <span><i class="material-icons align-icon">language</i> Notifications</span>
+  <span>Notifications</span>
   <% if current_user.current_requests.any? %>
     <span class="new badge red"><%= current_user.current_requests.count %></span>
   <% end %>
 <% end %>
 </li>
-<li><a class="dropdown-button" data-activates="dropdown"><%= gravatar_for(current_user, size: 40, img_class: "align-icon circle") %> <%= current_user.name %><i class="material-icons">arrow_drop_down</i></a>
-  <ul id="dropdown" class="dropdown-content">
-    <li><%= link_to "Settings", edit_user_registration_path %></li>
-    <li><%= link_to "Profile", user_path(current_user.id) %></li>
-    <li class="divider"></li>
-    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-  </ul>
-</li>
+<li class="divider"></li>
+<li><%= link_to "Settings", edit_user_registration_path %></li>
+<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 <% else %>
 <li><%= link_to "Log In" , new_user_session_path %></li>
 <li><%= link_to "Sign up", new_user_registration_path %></li>

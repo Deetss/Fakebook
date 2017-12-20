@@ -7,4 +7,10 @@ document.addEventListener("turbolinks:load", function(){
       draggable: true, // Choose whether you can drag to open on touch screens,
     });
     
-})
+    
+    
+    $(".dropdown-button").dropdown();
+        
+        
+    
+});

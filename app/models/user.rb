@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :send_welcome_email
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,12 +15,12 @@ class User < ApplicationRecord
                                    foreign_key: "requested_id",
                                    dependent: :destroy
                                    
-  has_many :req_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requestee_id
-  has_many :rec_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requested_id
+  has_many :req_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requestee_id, dependent: :destroy
+  has_many :rec_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requested_id, dependent: :destroy
   
-  has_many :posts
-  has_many :likes
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   def current_requests
     rec_requests.where(accepted: false)
@@ -53,6 +55,8 @@ class User < ApplicationRecord
     Post.where("user_id IN (?) OR user_id = ?", friend_ids, id)
   end
   
+  private
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -73,4 +77,7 @@ class User < ApplicationRecord
     end
   end
   
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
+  end
 end

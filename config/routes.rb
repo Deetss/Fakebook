@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   delete 'requests', to: 'relationships#destroy'
   
   # Users
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :users, only: [:show, :edit, :index]
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
+  resources :users, only: [:show, :index]
   
   # Posts
   resources :posts, only: [:create, :destroy]
