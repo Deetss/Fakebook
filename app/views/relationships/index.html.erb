@@ -2,7 +2,7 @@
 <ul class="collection with-header">
     <li class="collection-header"><h4>Friend Requests</h4></li>
 
-    <% current_user.rec_requests.each do |r| %>
+    <% current_user.current_requests.each do |r| %>
     <li class="collection-item avatar">
             <% unless r.accepted? %>
                 <%= gravatar_for(r.requestee, img_class: "circle") %>

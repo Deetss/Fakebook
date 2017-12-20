@@ -1,21 +1,19 @@
 <% provide(:title, "#{@user.name}'s Profile") %>
 <h1><%= gravatar_for(@user) %> <%= @user.name %></h1>
 <%= link_to pluralize(@user.friends.count, 'Friend'), friends_path(user_id: @user.id) %>
-<%# unless current_user.friends_list.include?(@user) || current_user.requested?(@user) || current_user == @user %>
-<%# end %>
-<% if current_user.friends_list.include?(@user) %>
-  <%= link_to requests_path(user_name: @user.name), method: :delete, action: :destroy, class: "waves-effect waves-light btn" do %>
-      <i class="material-icons">block</i>
-      Unfriend
-  <% end %>
-<% elsif current_user != @user && !current_user.requested?(@user) %>
-  <%= link_to request_friendship_path(:req_user => @user), class: "waves-effect waves-light btn" do %>
-    <i class="material-icons">group_add</i>
-    Add Friend
-  <% end %>
-<% elsif current_user == @user %>
-  <%# do nothing %>
-<% else %>
+<% if current_user.requested?(@user) %>
   Pending Friend Request
+<% else %>
+  <% if current_user.friends_list.include?(@user) %>
+    <%= link_to requests_path(user_name: @user.name), method: :delete, action: :destroy, class: "waves-effect waves-light btn" do %>
+        <i class="material-icons">block</i>
+        Unfriend
+    <% end %>
+  <% elsif current_user != @user %>
+    <%= link_to request_friendship_path(:req_user => @user), class: "waves-effect waves-light btn" do %>
+      <i class="material-icons">group_add</i>
+      Add Friend
+    <% end %>
+  <% end %>
 <% end %>
 <%= render 'users/feed' %>
