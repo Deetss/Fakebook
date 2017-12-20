@@ -5,26 +5,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: %i[facebook]
-         
-    
-  has_attached_file :picture, styles: {medium: "300x300>", thumb: "100x100>" }, default_url: "/images/missing.png"
-  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
   
   has_many :relationships
-       
   has_many :sent_requests, class_name: "Relationship",
                                   foreign_key: "requestee_id",
                                   dependent: :destroy
   has_many :rec_requests, class_name: "Relationship",
                                    foreign_key: "requested_id",
                                    dependent: :destroy
-                                   
   has_many :req_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requestee_id, dependent: :destroy
   has_many :rec_friends, -> { where(accepted: true) }, class_name: "Relationship", foreign_key: :requested_id, dependent: :destroy
-  
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  has_attached_file :picture, styles: {medium: "300x300>", thumb: "100x100>" }, default_url: "/images/missing.png"
+  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
   
   def current_requests
     rec_requests.where(accepted: false)
@@ -66,7 +62,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
-      user.picture = auth.info.image # assuming the user model has an image
+      #user.picture = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
