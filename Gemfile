@@ -40,6 +40,8 @@ gem 'figaro'
 # gem 'unicorn'
 # Use paperclip for image uploads
 gem "paperclip", "~> 5.0.0"
+# Upload images to aws s3
+gem 'aws-sdk', '~> 2.3.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

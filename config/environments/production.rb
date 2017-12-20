@@ -69,7 +69,17 @@ Rails.application.configure do
     :domain               => 'heroku.com',
     :enable_starttls_auto => true
   }
-
+  
+  
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV["AWS_S3_BUCKET"],
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]
+      }
+    } 
+  
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
