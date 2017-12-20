@@ -245,7 +245,7 @@ DEPENDENCIES
   letter_opener
   materialize-sass
   omniauth-facebook
-  paperclip (~> 5.0.0)
+  paperclip
   pg
   rails
   sass-rails (~> 5.0)
