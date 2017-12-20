@@ -6,6 +6,6 @@ class UserMailer < Devise::Mailer
   def welcome_email(user)
     @user = user
     @url  = new_user_session_url
-    mail(to: @user.email, subject: 'Welcome to Fakebook', from: message.sender.email)
+    mail(to: @user.email, subject: 'Welcome to Fakebook', from: message.sender)
   end
 end
