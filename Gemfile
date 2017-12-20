@@ -39,7 +39,7 @@ gem 'figaro'
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use paperclip for image uploads
-gem "paperclip", '3.0.4'
+gem "paperclip"
 # Upload images to aws s3
 gem 'aws-sdk', '~> 2.3.0'
 
