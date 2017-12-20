@@ -5,6 +5,12 @@ $secondary-color: #8b9dc3 !default;
 @import "materialize";
 
 
+/* Images */
+
+.nav-img {
+    vertical-align: middle;
+}
+
 /* Cards */
 
 .card-action {
@@ -15,6 +21,25 @@ $secondary-color: #8b9dc3 !default;
 
 .btn {
     height: 36px;
+    letter-spacing: 0;
+}
+
+.btn-margin-top {
+    margin-top: 5px;
+}
+
+.btn-right {
+    position: relative;
+    margin-left: auto;
+}
+
+.fb-button{
+    @extend .btn;
+    background-color: $primary-color;
+    @extend .btn-margin-top;
+    &:hover{
+      background-color: $primary-color;  
+    }
 }
 
 
@@ -40,6 +65,10 @@ ul#mobile.side-nav.right.right-aligned {
 /* Text */
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: $secondary-color;
+}
+
+.profile-link{
+    font-size: 24px;
 }
 
 
@@ -81,6 +110,10 @@ a {
     }
 }
 
+.fb-icon {
+    vertical-align: -6px;
+}
+
 /* Footer */
 
 
@@ -100,3 +133,18 @@ main {
 .align-icon {
     vertical-align: middle;
 }
+
+.align-middle {
+    position: relative;
+    vertical-align: middle ;
+}
+
+.pad-left{
+    padding-left: 8px;
+}
+
+.align-bottom {
+    position: relative;
+    vertical-align: bottom;
+}
+

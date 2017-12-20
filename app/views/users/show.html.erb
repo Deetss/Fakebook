@@ -1,6 +1,21 @@
 <% provide(:title, "#{@user.name}'s Profile") %>
-<h1><%= gravatar_for(@user) %> <%= @user.name %></h1>
-<%= link_to pluralize(@user.friends.count, 'Friend'), friends_path(user_id: @user.id) %>
+
+<h1><%= user_img(@user, img_class: "circle") %> <%= @user.name %></h1>
+
+<% if current_user == @user %>
+<div class="row">
+  <div class="col s6">
+  <%= form_for @user, url: upload_picture_path, method: :post, html: { multipart: true } do |f| %>
+    <%= f.file_field :picture %>
+    <%= f.submit "Change profile picture"%>
+  <% end %>
+  </div>
+  <div class="col s6">
+    <%= link_to pluralize(@user.friends.count, 'Friend'), friends_path(user_id: @user.id), class: "right" %>
+  </div>
+</div>
+<% end %>
+
 <% if current_user.requested?(@user) %>
   Pending Friend Request
 <% else %>
@@ -16,4 +31,5 @@
     <% end %>
   <% end %>
 <% end %>
+<%= render 'posts/post_form' if current_user == @user %>
 <%= render 'users/feed' %>

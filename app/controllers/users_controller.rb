@@ -11,6 +11,16 @@ class UsersController < ApplicationController
         render :search
     end
     
+    def upload_picture
+      if request.post?
+        @user = current_user
+        if @user.update_attribute(:picture, params[:user][:picture])
+            flash[:success] = "Picture uploaded!"
+            redirect_back(fallback_location: root_path)
+        end
+      end
+    end
+    
     def show
         @user = User.find(params[:id])
         @friends_list = @user.friends.map { |friend| User.find(friend_id(@user, friend)) }
@@ -24,4 +34,5 @@ class UsersController < ApplicationController
     def friend_id(user, friend)
         friend.requestee_id == user.id ? friend.requested_id : friend.requestee_id
     end
+    
 end

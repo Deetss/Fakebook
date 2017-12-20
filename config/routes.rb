@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   # Users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   resources :users, only: [:show, :index]
+  post 'upload_picture', to: 'users#upload_picture'
+  
   
   # Posts
   resources :posts, only: [:create, :destroy]

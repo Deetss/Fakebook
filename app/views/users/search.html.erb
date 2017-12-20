@@ -1,18 +1,13 @@
 <% provide(:title, "Search") %>
 <h4>You searched for "<%= @q %>"</h4>
-
-<div class="row">
-    <div class="col s12 m6">
-    <% @results.each do |user| %>
-      <div class="card white">
-        <div class="card-content black-text">
-          <span class="card-title"><%= gravatar_for(user, img_class: "circle") %> <%= user.name %></span>
-          <p><%= pluralize(user.friends.count, 'Friend') %></p>
-        </div>
-        <div class="card-action">
-          <%= link_to "View profile", user_path(user)%>
-        </div>
-      </div>
-    <% end %>
+<% @results.each do |user| %>
+  <div class="card white">
+    <div class="card-content black-text">
+      <span class="card-title"><%= gravatar_for(user, img_class: "circle") %>  <%= content_tag :span, user.name, class: "align-middle" %></span>
+      <%= content_tag :span, pluralize(user.friends.count, 'Friend'), class: "right" %>
     </div>
-</div>
+    <div class="card-action">
+      <%= link_to "View profile", user_path(user)%>
+    </div>
+  </div>
+<% end %>

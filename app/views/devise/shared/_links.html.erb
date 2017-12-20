@@ -1,5 +1,14 @@
 <%- if controller_name != 'sessions' && controller_name != 'static_pages' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <%= link_to "Log in", new_session_path(resource_name), class: "waves-effect waves-light btn btn-margin-top"  %><br />
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to omniauth_authorize_path(resource_name, provider), class: "fb-button" do %>
+        <%= image_tag "facebook-box.png", size: '24', class: "fb-icon" %>
+        <%= "Sign in with #{OmniAuth::Utils.camelize(provider)}" %>
+        <% end %><br />
+  <% end -%>
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -16,10 +25,4 @@
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
-<% end -%>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
 <% end -%>

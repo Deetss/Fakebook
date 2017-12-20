@@ -16,7 +16,7 @@
   <% end %>
 <% end %>
 </li>
-<li><a class="dropdown-button" data-activates="dropdown"><%= gravatar_for(current_user, size: 40, img_class: "align-icon circle") %> <%= current_user.name %><i class="material-icons">arrow_drop_down</i></a>
+<li><a class="dropdown-button" data-activates="dropdown"><%= user_img(current_user, size: 48, img_class: "nav-img circle") %> <%= current_user.name %><i class="material-icons">arrow_drop_down</i></a>
   <ul id="dropdown" class="dropdown-content">
     <li><%= link_to "Settings", edit_user_registration_path %></li>
     <li><%= link_to "Profile", user_path(current_user.id) %></li>
