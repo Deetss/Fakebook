@@ -3,7 +3,7 @@
 <% @results.each do |user| %>
   <div class="card white">
     <div class="card-content black-text">
-      <span class="card-title"><%= gravatar_for(user, img_class: "circle") %>  <%= content_tag :span, user.name, class: "align-middle" %></span>
+      <span class="card-title"><%= user_img(current_user, size: 60, img_class: "nav-img circle") %>  <%= content_tag :span, user.name, class: "align-middle" %></span>
       <%= content_tag :span, pluralize(user.friends.count, 'Friend'), class: "right" %>
     </div>
     <div class="card-action">

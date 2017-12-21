@@ -14,9 +14,11 @@ class UsersController < ApplicationController
     def upload_picture
       if request.post?
         @user = current_user
-        if @user.update_attribute(:picture, params[:user][:picture])
-            flash[:success] = "Picture uploaded!"
-            redirect_back(fallback_location: root_path)
+        unless params[:user].nil?
+            if @user.update_attribute(:picture, params[:user][:picture])
+                flash[:success] = "Picture uploaded!"
+                redirect_back(fallback_location: root_path)
+            end
         end
       end
     end

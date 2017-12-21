@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   
-  has_attached_file :picture, default_url: "/images/missing.png"
+  has_attached_file :picture,styles: { medium: "300x300>", thumb: "120x120>"} , default_url: "/images/missing.png"
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
   
   def current_requests

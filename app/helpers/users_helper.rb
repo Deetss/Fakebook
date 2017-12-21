@@ -1,6 +1,6 @@
 module UsersHelper
     #Returns the Gravatar for the given User
-    def gravatar_for(user, options = { size: 120, img_class: '' })
+    def gravatar_for(user, options = { size: 100, img_class: '' })
         gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
         size = options[:size]
         img_class = options[:img_class]
@@ -8,9 +8,9 @@ module UsersHelper
         image_tag(gravatar_url, alt: user.name, class: img_class)
     end
     
-    def user_img(user, options = { size: 120, img_class: '' })
+    def user_img(user, options = { size: 100, img_class: '' })
         size = options[:size]
         img_class = options[:img_class]
-        user.picture.file? ? image_tag(user.picture.url, class: img_class, size: "#{size}") : gravatar_for(user, img_class: img_class, size: size)
+        user.picture.file? ? image_tag(user.picture.url(:thumb), class: img_class, size: "#{size}") : gravatar_for(user, img_class: img_class, size: size)
     end
 end

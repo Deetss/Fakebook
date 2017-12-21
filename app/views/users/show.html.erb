@@ -1,6 +1,6 @@
 <% provide(:title, "#{@user.name}'s Profile") %>
 
-<h1><%= user_img(@user, img_class: "circle") %> <%= @user.name %></h1>
+<h1><%= user_img(@user, img_class: "circle", size: 120) %> <%= @user.name %></h1>
 
 <% if current_user == @user %>
 <div class="row">

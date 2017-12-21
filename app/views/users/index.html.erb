@@ -2,7 +2,7 @@
 <ul class="collection">
     <% @users.each do |user| %>
         <li class="collection-item avatar">
-          <%= gravatar_for(user, img_class: "circle") %>
+          <%= user_img(user, size: 48, img_class: "nav-img circle") %>
           <span class="title"><%= user.name %></span>
           <p><%= pluralize(user.friends.count, "Friend") %></p>
           <p class="secondary-content">
