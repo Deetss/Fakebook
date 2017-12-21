@@ -10,11 +10,11 @@
     <%= f.submit "Change profile picture"%>
   <% end %>
   </div>
+<% end %>
   <div class="col s6">
     <%= link_to pluralize(@user.friends.count, 'Friend'), friends_path(user_id: @user.id), class: "right" %>
   </div>
 </div>
-<% end %>
 
 <% if current_user.requested?(@user) %>
   Pending Friend Request
