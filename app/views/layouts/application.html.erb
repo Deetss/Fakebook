@@ -25,7 +25,7 @@
   <main>
     <div class="container">
      <div class="row">
-        <div class="col s12 m8 offset-m2">
+        <div class="col s12 m12">
           <% flash.each do |msg_type, msg| %>
           <div class="card <%= msg_type %>">
             <div class="card-content white-text center-align">
@@ -36,9 +36,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m8 offset-m2">
-        <%= yield %>
-        <%= debug(params) if Rails.env.development? %>
+        <div class="col s12 m12">
+          <div class="row">
+            <div class="col s12 m10 offset-m1">
+              <%= yield %>
+              <%= debug(params) if Rails.env.development? %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

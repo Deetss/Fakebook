@@ -45,8 +45,12 @@ $secondary-color: #8b9dc3 !default;
 
 /* Navigation */
 
-nav .brand-logo {
-    padding-left: 15px;
+.dropdown-button{
+    padding-right: 0;
+}
+div.nav-wrapper{
+    padding-left: 20.9%;
+    padding-right: 20.9%;
 }
 
 nav .input-field {
